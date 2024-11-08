@@ -3,23 +3,20 @@ package main
 import (
 	"log"
 
-	"github.com/LuigiVanacore/ebiten_game_example"
+	"github.com/LuigiVanacore/ebiten_stardew_valley"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-const (
-	screenWidth  = 640
-	screenHeight = 480
-)
+
 
 
 func main() {
-	ebiten.SetWindowSize(screenWidth, screenHeight)
+	ebiten.SetWindowSize(ebiten_stardew_valley.SCREEN_WIDTH, ebiten_stardew_valley.SCREEN_HEIGHT)
 	ebiten.SetWindowTitle("Sprite Example")
 
 	
 	
-	game := ebiten_game_example.NewGame()
+	game := ebiten_stardew_valley.NewGame(true)
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
