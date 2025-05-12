@@ -11,13 +11,21 @@ type Game struct {
 }
 
 func NewGame(debugFlag bool) *Game {
+
 	ebiten_extended.GameManager().SetIsDebug(debugFlag)
+
 	ebiten_extended.ResourceManager().AddImage(PLAYER_SPRITE, resources.Character_Down_0)
+
 	LoadAnimationSets()
+
 	player := NewPlayer(math2D.NewVector2D(0, 0))
+	
 	gameLayer := ebiten_extended.NewLayer(2, 2, "GameLayer")
+
 	gameLayer.AddNode(player)
+
 	ebiten_extended.GameManager().World().AddLayer(gameLayer)
+
 	return &Game{}
 }
 

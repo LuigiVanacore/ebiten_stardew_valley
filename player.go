@@ -9,37 +9,70 @@ import (
 
 type Player struct {
 	ebiten_extended.Node2D
+	animationPlayer *ebiten_extended.AnimationPlayer
 	direction math2D.Vector2D
 	speed     int
 }
 
 func NewPlayer(pos math2D.Vector2D) *Player {
+	animationPlayer := ebiten_extended.NewAnimationPlayer()
 	player := &Player{
 		Node2D: *ebiten_extended.NewNode2D("player"),
-		speed: 20,
+		animationPlayer: animationPlayer,
+		speed: PLAYER_SPEED,
+		direction: math2D.NewVector2D(0, 0),
 	}
-	animationPlayer := ebiten_extended.NewAnimationPlayer()
-	animationPlayer.AddAnimation(animationSets[Character_Down], Character_Down)
-	// player_sprite := ebiten_extended.NewSprite("player_sprite", ebiten_extended.ResourceManager().GetTexture(PLAYER_SPRITE) , true)
-	// player.AddChildren(player_sprite)
-	// player.SetPosition(pos.X(), pos.Y())
-	player.AddChildren(animationPlayer)
+
+	player.loadAnimations()
+
+	player.AddChild(animationPlayer)
+	player.animationPlayer.SetCurrentAnimation(Character_Down_Idle)
+	player.animationPlayer.Start()
+
 	return player
 }
 
+func (p *Player) loadAnimations() {
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Down), Character_Down)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Up), Character_Up)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Left), Character_Left)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Right), Character_Right)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Down_Idle), Character_Down_Idle)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Up_Idle), Character_Up_Idle)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Left_Idle), Character_Left_Idle)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Right_Idle), Character_Right_Idle)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Down_Axe), Character_Down_Axe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Up_Axe), Character_Up_Axe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Left_Axe), Character_Left_Axe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Right_Axe), Character_Right_Axe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Down_Hoe), Character_Down_Hoe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Up_Hoe), Character_Up_Hoe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Left_Hoe), Character_Left_Hoe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Right_Hoe), Character_Right_Hoe)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Down_Water), Character_Down_Water)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Up_Water), Character_Up_Water)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Left_Water), Character_Left_Water)
+	p.animationPlayer.AddAnimation(ebiten_extended.ResourceManager().GetAnimation(Character_Right_Water), Character_Right_Water)
+}
+
 func (p *Player) Input() {
+	key_pressed := inpututil.AppendJustPressedKeys()
 	if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 		p.direction.SetY(-1)
+		p.animationPlayer.SetCurrentAnimation(Character_Up)
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 		p.direction.SetY(1)
+		p.animationPlayer.SetCurrentAnimation(Character_Down)
 	} else {
 		p.direction.SetY(0)
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
 		p.direction.SetX(1)
+		p.animationPlayer.SetCurrentAnimation(Character_Right)
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
 		p.direction.SetX(-1)
+		p.animationPlayer.SetCurrentAnimation(Character_Left)
 	} else {
 		p.direction.SetX(0)
 	}

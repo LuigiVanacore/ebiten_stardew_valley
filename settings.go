@@ -15,6 +15,11 @@ const (
 
 
 const (
+    PLAYER_SPEED = 5
+)
+
+
+const (
     PLAYER_SPRITE = "player"
 
     // Define constants for each key string
@@ -299,28 +304,6 @@ const (
 
 // AnimationSet represents a set of images for animation
 
-var animationSets = map[string]*ebiten_extended.AnimationSet{
-	Character_Down:      {},
-	Character_Down_Axe:  {},
-	Character_Down_Hoe:  {},
-	Character_Down_Idle: {},
-	Character_Down_Water: {},
-	Character_Left:      {},
-	Character_Left_Axe:  {},
-	Character_Left_Hoe:  {},
-	Character_Left_Idle: {},
-	Character_Left_Water: {},
-	Character_Right:     {},
-	Character_Right_Axe: {},
-	Character_Right_Hoe: {},
-	Character_Right_Idle: {},
-	Character_Right_Water: {},
-	Character_Up:        {},
-	Character_Up_Axe:    {},
-	Character_Up_Hoe:    {},
-	Character_Up_Idle:   {},
-	Character_Up_Water:  {},
-}
 
 // CreateAnimationSets creates a map of AnimationSet with key as constant string
 func LoadAnimationSets() {
@@ -329,7 +312,7 @@ func LoadAnimationSets() {
 
 	
 	// Define the mapping of key strings to their corresponding image keys
-	imageKeys := map[string][]string{
+	animmationSets := map[string][]string{
 		Character_Down:      {Character_Down_0, Character_Down_1, Character_Down_2, Character_Down_3},
 		Character_Down_Axe:  {Character_Down_Axe_0, Character_Down_Axe_1},
 		Character_Down_Hoe:  {Character_Down_Hoe_0, Character_Down_Hoe_1},
@@ -355,15 +338,15 @@ func LoadAnimationSets() {
 	var spriteSheet []*ebiten.Image
 
 	// Load images into the AnimationSet
-	for key, imageKeys := range imageKeys {
+	for key, animationKeys := range animmationSets {
 		spriteSheet = nil
-		for _, imageKey := range imageKeys {
-			img := ebiten_extended.ResourceManager().GetImage(imageKey)
+		for _, animationKey := range animationKeys {
+			img := ebiten_extended.ResourceManager().GetImage(animationKey)
 			if img != nil {
 				spriteSheet = append(spriteSheet, img)
 			}
 		}
-		animationSets[key] = ebiten_extended.NewAnimationSet(spriteSheet, getCenterImage(spriteSheet[0]), uint(len(spriteSheet)), 4 / float64(len(spriteSheet))  , true)
+		ebiten_extended.ResourceManager().AddAnimation(key, ebiten_extended.NewAnimationSet(spriteSheet, getCenterImage(spriteSheet[0]), uint(len(spriteSheet)), 4 / float64(len(spriteSheet))  , true))
 	}
 }
 

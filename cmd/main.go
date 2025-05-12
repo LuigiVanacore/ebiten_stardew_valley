@@ -16,7 +16,7 @@ func main() {
 
 	
 	
-	game := ebiten_stardew_valley.NewGame(true)
+	game := ebiten_stardew_valley.NewGame(false)
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
