@@ -62,7 +62,6 @@ func (p *Player) Input() {
 		p.animationPlayer.SetCurrentAnimation(Character_Up)
 	} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 		p.direction.SetY(1)
-		p.animationPlayer.SetCurrentAnimation(Character_Down)
 	} else {
 		p.direction.SetY(0)
 	}
