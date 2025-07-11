@@ -18,6 +18,57 @@ const (
     PLAYER_SPEED = 5
 )
 
+const (
+    WATER_LAYER = iota
+    GROUND_LAYER
+    SOIL_LAYER
+    SOIL_WATER_LAYER
+    RAIN_FLOOR_LAYER
+    HOUSE_BOTTOM_LAYER
+    GROUND_PLANT_LAYER
+    MAIN_LAYER
+    HOUSE_TOP_LAYER
+    FRUIT_LAYER
+    RAIN_DROPS_LAYER
+    UI_LAYER
+)
+
+
+
+
+var player_tool_offset = map[string]math2D.Vector2D{
+        "left":  math2D.NewVector2D(-50, 40),
+        "right": math2D.NewVector2D(50, 40),
+        "up":    math2D.NewVector2D(0, -10),
+        "down":  math2D.NewVector2D(0, 50),
+        } 
+
+
+const (
+    GROW_SPEED_CORN    = 1
+    GROW_SPEED_TOMATO  = 0.7
+    SALE_PRICE_WOOD    = 4
+    SALE_PRICE_APPLE   = 2
+    SALE_PRICE_CORN    = 10
+    SALE_PRICE_TOMATO  = 20
+    PURCHASE_PRICE_CORN = 4
+    PURCHASE_PRICE_TOMATO = 5
+    PURCHASE_PRICE_APPLE = 3
+    PURCHASE_PRICE_WOOD = 2
+    PURCHASE_PRICE_AXE = 10
+    PURCHASE_PRICE_HOE = 10
+    PURCHASE_PRICE_WATERING_CAN = 10
+    PURCHASE_PRICE_SEEDS = 5
+    PURCHASE_PRICE_WATER = 2
+    PURCHASE_PRICE_FERTILIZER = 5
+    PURCHASE_PRICE_FENCE = 2
+    PURCHASE_PRICE_STUMP = 5
+    PURCHASE_PRICE_MUSHROOM = 3
+    PURCHASE_PRICE_SUNFLOWER = 3
+    PURCHASE_PRICE_FLOWER = 2
+    PURCHASE_PRICE_BUSH = 2
+)
+
 
 const (
     PLAYER_SPRITE = "player"
@@ -346,7 +397,7 @@ func LoadAnimationSets() {
 				spriteSheet = append(spriteSheet, img)
 			}
 		}
-		ebiten_extended.ResourceManager().AddAnimation(key, ebiten_extended.NewAnimationSet(spriteSheet, getCenterImage(spriteSheet[0]), uint(len(spriteSheet)), 4 / float64(len(spriteSheet))  , true))
+		ebiten_extended.ResourceManager().AddAnimation(key, ebiten_extended.NewAnimationSet(spriteSheet, getCenterImage(spriteSheet[0]), uint(len(spriteSheet)), float64(len(spriteSheet))  , true))
 	}
 }
 
