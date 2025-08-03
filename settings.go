@@ -1,6 +1,8 @@
 package ebiten_stardew_valley
 
 import (
+	"image/color"
+
 	"github.com/LuigiVanacore/ebiten_extended"
 	"github.com/LuigiVanacore/ebiten_extended/math2D"
 	"github.com/LuigiVanacore/ebiten_stardew_valley/resources"
@@ -33,6 +35,24 @@ const (
     UI_LAYER
 )
 
+
+var (
+	WHITE_COLOR      = color.RGBA{0xf4, 0xfe, 0xfa, 0xff}
+	PURE_WHITE_COLOR = color.RGBA{0xff, 0xff, 0xff, 0xff}
+	DARK_COLOR       = color.RGBA{0x2b, 0x29, 0x2c, 0xff}
+	LIGHT_COLOR      = color.RGBA{0xc8, 0xc8, 0xc8, 0xff}
+	GRAY_COLOR       = color.RGBA{0x3a, 0x37, 0x3b, 0xff}
+	GOLD_COLOR       = color.RGBA{0xff, 0xd7, 0x00, 0xff}
+	LIGHT_GRAY_COLOR = color.RGBA{0x4b, 0x48, 0x4d, 0xff}
+	FIRE_COLOR       = color.RGBA{0xf8, 0xa0, 0x60, 0xff}
+	WATER_COLOR      = color.RGBA{0x50, 0xb0, 0xd8, 0xff}
+	PLANT_COLOR      = color.RGBA{0x64, 0xa9, 0x90, 0xff}
+	BLACK_COLOR      = color.RGBA{0x00, 0x00, 0x00, 0xff}
+	RED_COLOR        = color.RGBA{0xf0, 0x31, 0x31, 0xff}
+	BLUE_COLOR       = color.RGBA{0x66, 0xd7, 0xee, 0xff}
+	NORMAL_COLOR     = color.RGBA{0xff, 0xff, 0xff, 0xff}
+	DARK_WHITE_COLOR = color.RGBA{0xf0, 0xf0, 0xf0, 0xff}
+)
 
 
 
@@ -351,6 +371,7 @@ const (
     Character_Up_Hoe    = "Character_Up_Hoe"
     Character_Up_Idle   = "Character_Up_Idle"
     Character_Up_Water  = "Character_Up_Water"
+    Water = "Water"
 )
 
 // AnimationSet represents a set of images for animation
@@ -384,6 +405,7 @@ func LoadAnimationSets() {
 		Character_Up_Hoe:    {Character_Up_Hoe_0, Character_Up_Hoe_1},
 		Character_Up_Idle:   {Character_Up_Idle_0, Character_Up_Idle_1},
 		Character_Up_Water:  {Character_Up_Water_0, Character_Up_Water_1},
+		Water:               {Water_0, Water_1, Water_2, Water_3},
 	}
 
 	var spriteSheet []*ebiten.Image

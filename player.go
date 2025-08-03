@@ -1,6 +1,7 @@
 package ebiten_stardew_valley
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LuigiVanacore/ebiten_extended"
@@ -89,6 +90,8 @@ func NewPlayer(pos math2D.Vector2D) *Player {
 		direction: math2D.NewVector2D(0, 0),
 		orientation: DOWN,
 	}
+
+	player.SetPosition(pos)
 
 	player.stateMachine = NewPlayerStateMachine(player)
 
@@ -249,6 +252,7 @@ func (p *Player) Move() {
 func (p *Player) Update() {
 	p.Input()
 	p.stateMachine.Update()
+	fmt.Println("Current Position:", p.GetPosition())
 }	
 
 
